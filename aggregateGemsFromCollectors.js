@@ -1,3 +1,13 @@
+const gemValueMap = require('./data/gemValueMap.js')
+
+function emptyGemBag(valueMap) {
+  let table = Object.entries(valueMap)
+  return table.reduce((bag, [name, _]) => {
+    bag[name] = 0
+    return bag
+  }, {})
+}
+
 function aggregateGemsFromCollectors(collectors) {
   return collectors.reduce((bag, collector) => {
     collector.gems.map(gem => {
@@ -5,12 +15,9 @@ function aggregateGemsFromCollectors(collectors) {
     })
 
     return bag
-  }, {
-    "Ruby": 0,
-    "Emerald": 0,
-    "Moonstone": 0,
-    "Diamond" : 0
-  })
+  },
+    emptyGemBag(gemValueMap)
+  )
 }
 
 module.exports = aggregateGemsFromCollectors;
